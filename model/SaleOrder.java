@@ -1,19 +1,24 @@
-package Model;
+package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class SaleOrder {
 
-	private OrderLine orderLine;
-	private LocalDate date;
+	private ArrayList<OrderLine> orderLines;
+	private int orderNo;
+	private Customer customer;
+	private LocalDateTime date;
 	private double amount;
 	private String deliveryStatus;
-	private LocalDate deliveryDate;
+	private LocalDateTime deliveryDate;
 	private int invoiceNo;
-	private LocalDate paymentDate;
+	private LocalDateTime paymentDate;
 		
-	public SaleOrder(OrderLine orderLine, LocalDate date, double amount, String deliveryStatus, LocalDate deliveryDate, int invoiceNo, LocalDate paymentDate) {
-		this.orderLine = orderLine;
+	public SaleOrder(ArrayList<OrderLine> orderLines, int orderNo ,Customer customer,LocalDateTime date , double amount, String deliveryStatus, LocalDateTime deliveryDate, int invoiceNo, LocalDateTime paymentDate) {
+		this.orderLines = orderLines;
+		this.orderNo = orderNo;
+		this.customer = customer;
 		this.date = date;
 		this.amount = amount;
 		this.deliveryStatus = deliveryStatus;
@@ -22,21 +27,44 @@ public class SaleOrder {
 		this.paymentDate = paymentDate;
 		
 	}
-	public SaleOrder() {
+	
+	public void addOrderLine(OrderLine orderLine) {
+		orderLines.add(orderLine);
 	}
 	
-	public OrderLine getOrderLine() {
-		return orderLine;
-	}
-	public void setOrderLine(OrderLine orderLine) {
-		this.orderLine = orderLine; 
+	public int getOrderNo() {
+		return orderNo;
 	}
 
-	public LocalDate getDate() {
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	public SaleOrder(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public ArrayList<OrderLine> getOrderLines() {
+		return orderLines;
+	}
+	
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
+		this.orderLines = orderLines; 
+	}
+
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
@@ -56,11 +84,11 @@ public class SaleOrder {
 		this.deliveryStatus = deliveryStatus;
 	}
 
-	public LocalDate getDeliveryDate() {
+	public LocalDateTime getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(LocalDate deliveryDate) {
+	public void setDeliveryDate(LocalDateTime deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -71,10 +99,12 @@ public class SaleOrder {
 	public void setInvoiceNo(int invoiceNo) {
 		this.invoiceNo = invoiceNo;
 	}
-	public LocalDate getPaymentDate() {
+	
+	public LocalDateTime getPaymentDate() {
 		return paymentDate;
 	}
-	public void setPaymentDate(LocalDate paymentDate) {
+	
+	public void setPaymentDate(LocalDateTime paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 

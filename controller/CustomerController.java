@@ -2,6 +2,7 @@ package controller;
 
 import model.Customer;
 import db.DBCustomer;
+import db.DBException;
 
 public class CustomerController {
 	DBCustomer dbCustomer;
@@ -9,9 +10,7 @@ public class CustomerController {
 		dbCustomer = new DBCustomer();
 	}
 	
-	public Customer finCustomerByCustomerNo(int customerNo) {
-		// potentially, there will be a need to check if customer exists
-		
+	public Customer findCustomerByNumber(int customerNo) throws DBException {
 		return dbCustomer.findCustomerByNumber(customerNo);
 	}
 }

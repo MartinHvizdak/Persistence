@@ -1,17 +1,18 @@
 package controller;
 
 import model.Product;
+import db.DBException;
 import db.DBProduct;
 
 public class ProductController {
 	DBProduct dbProduct;
+		
 	public ProductController() {
 		dbProduct = new DBProduct();
 	}
 	
-	public Product findProductByBarcode(int barcode) {
-		
-		// needs checks to be added after the rest of the classes will be made
-		return dbProduct.findProductByBarcode(barcode);
+	public Product findProductByBarcode(int barcode) throws DBException {
+		return dbProduct.findByBarcode(barcode);
 	}
+
 }

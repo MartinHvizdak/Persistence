@@ -1,24 +1,37 @@
-package Model;
+package model;
 
 public class OrderLine {
+	Product product;
+	private int amount;
+	private OrderType.Type orderType;
 	
-	private double amount;
-	private String orderType;
-	
-	public OrderLine(double amount, String orderType) {
+	public OrderLine(Product product, int amount, OrderType.Type orderType) {
+		this.product = product;
 		this.amount = amount; 
 		this.orderType = orderType;
 	}
-	public double getAmount() {
+	
+	public Product getProduct() {
+		return product; 
+	}
+	
+	public void setProduct(Product product) {
+		this.product = product; 
+	}
+	
+	public int getAmount() {
 		return amount; 
 	}
-	public void setAmount(double amount) {
+	
+	public void setAmount(int amount) {
 		this.amount = amount; 
 	}
-	public String getOrderType() {
+	
+	public OrderType.Type getOrderType() {
 		return orderType;
 	}
-	public void setOrderType(String orderType) {
+	
+	public void setOrderType(OrderType.Type orderType) {
 		this.orderType = orderType;
 	}
 }
