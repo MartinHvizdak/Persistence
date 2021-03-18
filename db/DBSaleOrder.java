@@ -13,8 +13,8 @@ public class DBSaleOrder {
 		
 		Connection con = DBConnection.getInstance().getDBcon();
 
-		String insert1 = "insert into SaleOrder (OrderNo, Date, Amount, DeliveryStatus, DeliveryDate, CustomerNo) values (?, ?, ?, ?, ?, ?);";
-		String insert2 = "insert into OrderLine (OrderNo, ProductBarcode, Amount) values (?, ?, ?)";
+		String insert1 = "insert into SaleOrder (OrderNo, OrderDate, Amount, DeliveryStatus, DeliveryDate, CustomerNo) values (?, ?, ?, ?, ?, ?);";
+		String insert2 = "insert into OrderLine (OrderNo, ProductBarcode, Quantity, OrderType) values (?, ?, ?)";
 		String insert3 = "insert into Invoice (InvoiceNo, PaymentDate, SaleOrderNo) values (?, ?, ?)";
 		System.out.println(insert1);
 		System.out.println(insert2);
@@ -37,6 +37,7 @@ public class DBSaleOrder {
 				stmt.setInt(1, o.getOrderNo());
 				stmt.setInt(2, o.getOrderLines().get(i).getProduct().getBarcode());
 				stmt.setInt(3, o.getOrderLines().get(i).getAmount());
+				stmt.setString(4, o.getOrderLines().get(i).getOrderType().toString());
 				stmt.setQueryTimeout(5);
 				stmt.execute();
 			}
@@ -52,14 +53,17 @@ public class DBSaleOrder {
 		} catch (SQLException ex) {
 			DBException de = new DBException("Error inserting data");
 			de.setStackTrace(ex.getStackTrace());
+			ex.printStackTrace();
 			throw de;
 		} catch (NullPointerException ex) {
 			DBException de = new DBException("Null pointer exception - possibly Connection object");
 			de.setStackTrace(ex.getStackTrace());
+			ex.printStackTrace();
 			throw de;
 		} catch (Exception ex) {
 			DBException de = new DBException("Data not inserted! Technical error");
 			de.setStackTrace(ex.getStackTrace());
+			ex.printStackTrace();
 			throw de;
 		} finally {
 			DBConnection.closeConnection();

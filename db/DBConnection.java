@@ -8,10 +8,10 @@ import java.sql.DriverManager;
 public class DBConnection {
 	
 	private static final String  driver = "jdbc:sqlserver://localhost:1433";;
-    private static final String  databaseName = ";databaseName=<insert database name>";
+    private static final String  databaseName = ";databaseName=persistance";
     
     private static String  userName = "; user=sa";
-    private static String password = ";password=<insert password>";
+    private static String password = ";password=123";
    
     private DatabaseMetaData dma;
     private static Connection con;
@@ -27,6 +27,7 @@ public class DBConnection {
             System.out.println("Driver class loaded ok");
           
         }
+        
         catch(Exception e){
             System.out.println("Cannot find the driver");
             System.out.println(e.getMessage());

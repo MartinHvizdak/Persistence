@@ -16,6 +16,7 @@ public class DBCustomer implements IDBCustomer {
 		String select1 = "select Fname, Lname, Address, Zipcode, PhoneNo, CountryCode from Customer WHERE CustomerNo = ?";
 		String select2 = "select City from ZipcodeCity WHERE Zipcode = ?";
 		System.out.println(select1);
+		System.out.println(select2);
 		
 		try {
 			PreparedStatement stmt = con.prepareStatement(select1);
@@ -52,11 +53,13 @@ public class DBCustomer implements IDBCustomer {
 			customer = null;
 			DBException de = new DBException("Null pointer exception - possibly Connection object");
 			de.setStackTrace(ex.getStackTrace());
+			ex.printStackTrace();
 			throw de;
 		} catch (Exception ex) {
 			customer = null;
 			DBException de = new DBException("Data not retrieved! Technical error");
 			de.setStackTrace(ex.getStackTrace());
+			ex.printStackTrace();
 			throw de;
 		} finally {
 			DBConnection.closeConnection();

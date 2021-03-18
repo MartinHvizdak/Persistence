@@ -20,10 +20,19 @@ public class OrderProcessingTest {
 	}
 	
 	@Test
-	public void successfulOrder() throws DBException {
-		saleOrder = soc.createOrder(101);
+	public void successfulOrder() {
+		try {
+			saleOrder = soc.createOrder(101);
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
 		
-		String result = soc.addProduct(saleOrder, 100201, 0);
+		String result = "";
+		try {
+			result = soc.addProduct(saleOrder, 100201, 0);
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
 		assertEquals("Should return the same string", "Product added", result);
 	}
 }

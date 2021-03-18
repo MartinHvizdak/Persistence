@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDateTime;
+
 import model.SaleOrder;
 import model.Customer;
 import model.Product;
@@ -21,8 +23,19 @@ public class SaleOrderController {
 	
 	public SaleOrder createOrder(int customerNo) throws DBException {
 		Customer c = customerController.findCustomerByNumber(customerNo);
+		LocalDateTime date = LocalDateTime.now();
+		int orderNo = date.getMinute()%10 + date.getDayOfYear()%10 +  + date.getNano()%10 + date.getHour()%10;
+		int invoiceNo = orderNo;
+		String deliveryStatus = "waiting for payment";
 		
-		return new SaleOrder(c);
+		SaleOrder order = new SaleOrder(c);
+		
+		order.setDate(date);
+		order.setOrderNo(orderNo);
+		order.setInvoiceNo(invoiceNo);
+		order.setDeliveryStatus(deliveryStatus);
+		
+		return order;
 	}
 	
 	public String addProduct(SaleOrder order, int barcode, int quantity) throws DBException {
@@ -40,7 +53,12 @@ public class SaleOrderController {
 
 	}
 	
-	public void confirmOrder(SaleOrder order) throws DBException {
-		dbSaleOrder.saveOrder(order);
+	public void confirmOrder(SaleOrder o) throws DBException {
+		int amount = 0;
+		for(int i = 0; i < o.getOrderLines().size(); i++) {
+			amount += o.getOrderLines().get(i).getProduct().getSalesPrice();
+		}
+		o.setAmount(amount);
+		dbSaleOrder.saveOrder(o);
 	}
 }
