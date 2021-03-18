@@ -5,6 +5,7 @@ import model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class DBProduct implements IDBProduct{
@@ -13,22 +14,23 @@ public class DBProduct implements IDBProduct{
 		Product product = new Product(barcode);
 		Connection con = DBConnection.getInstance().getDBcon();
 
-		String select = "select Barcode, Name, PurchacePrice, SaleSprice, RentPrice, CountryOfOrigin, MinStock, CurrentStock, ProductType, SupplierEmail from Product where Barcode=?";
-		System.out.println(select);
+		String selectQuery = "select * from Product where Barcode="+barcode;
+		System.out.println(selectQuery);
 		
 		try {
-			PreparedStatement stmt = con.prepareStatement(select);
-			stmt.setInt(1, barcode);
+			Statement stmt = con.createStatement();
+			
 			stmt.setQueryTimeout(5);
-			ResultSet rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery(selectQuery);
 			rs.next();
+			
 			product.setName(rs.getString("Name"));
 			product.setPurchasePrice(rs.getInt("PurchacePrice"));
-			product.setSalesPrice(rs.getInt("SaleSprice"));
-			product.setRentPrice(rs.getInt("RentPrice"));
+			product.setSalesPrice(rs.getDouble("SaleSprice"));
+			product.setRentPrice(rs.getDouble("RentPrice"));
 			product.setCountryOfOrigin(rs.getString("CountryOfOrigin"));
 			product.setMinStock(rs.getInt("MinStock"));
-			product.setCurrentStock(rs.getInt("CurrentStock"));
+			product.setCurrentStock(rs.getInt("CurrenyStock"));
 			stmt.close();
 		} catch (SQLException ex) {
 			product = null;
