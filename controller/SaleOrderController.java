@@ -40,7 +40,7 @@ public class SaleOrderController {
 	
 	public String addProduct(SaleOrder order, int barcode, int quantity) throws DBException {
 		Product p;
-		int stock;
+		int stock = 0;
 		OrderLine ol;
 		p = productController.findProductByBarcode(barcode);
 		stock = p.getCurrentStock();

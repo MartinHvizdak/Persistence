@@ -16,6 +16,7 @@ public class SaleOrder {
 	private LocalDateTime paymentDate;
 		
 	public SaleOrder(ArrayList<OrderLine> orderLines, int orderNo ,Customer customer,LocalDateTime date , double amount, String deliveryStatus, LocalDateTime deliveryDate, int invoiceNo, LocalDateTime paymentDate) {
+		this.orderLines = new ArrayList<OrderLine>();
 		this.orderLines = orderLines;
 		this.orderNo = orderNo;
 		this.customer = customer;
@@ -28,8 +29,13 @@ public class SaleOrder {
 		
 	}
 	
+	public SaleOrder(Customer customer) {
+		this.orderLines = new ArrayList<OrderLine>();
+		this.customer = customer;
+	}
+	
 	public void addOrderLine(OrderLine orderLine) {
-		orderLines.add(orderLine);
+		this.orderLines.add(orderLine);
 	}
 	
 	public int getOrderNo() {
@@ -38,10 +44,6 @@ public class SaleOrder {
 
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
-	}
-	
-	public SaleOrder(Customer customer) {
-		this.customer = customer;
 	}
 	
 	public Customer getCustomer() {

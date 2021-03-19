@@ -2,12 +2,12 @@ package model;
 
 public class OrderLine {
 	Product product;
-	private int amount;
+	private int quantity;
 	private OrderType.Type orderType;
 	
-	public OrderLine(Product product, int amount, OrderType.Type orderType) {
+	public OrderLine(Product product, int quantity, OrderType.Type orderType) {
 		this.product = product;
-		this.amount = amount; 
+		this.quantity = quantity; 
 		this.orderType = orderType;
 	}
 	
@@ -19,12 +19,12 @@ public class OrderLine {
 		this.product = product; 
 	}
 	
-	public int getAmount() {
-		return amount; 
+	public int getQuantity() {
+		return quantity; 
 	}
 	
-	public void setAmount(int amount) {
-		this.amount = amount; 
+	public void setQuantity(int quantity) {
+		this.quantity = quantity; 
 	}
 	
 	public OrderType.Type getOrderType() {

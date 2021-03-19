@@ -36,19 +36,16 @@ public class DBProduct implements IDBProduct{
 			product = null;
 			DBException de = new DBException("Error retrieving data");
 			de.setStackTrace(ex.getStackTrace());
-			ex.printStackTrace();
 			throw de;
 		} catch (NullPointerException ex) {
 			product = null;
 			DBException de = new DBException("Null pointer exception - possibly Connection object");
 			de.setStackTrace(ex.getStackTrace());
-			ex.printStackTrace();
 			throw de;
 		} catch (Exception ex) {
 			product = null;
 			DBException de = new DBException("Data not retrieved! Technical error");
 			de.setStackTrace(ex.getStackTrace());
-			ex.printStackTrace();
 			throw de;
 		} finally {
 			DBConnection.closeConnection();

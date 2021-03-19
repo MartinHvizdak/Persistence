@@ -47,19 +47,16 @@ public class DBCustomer implements IDBCustomer {
 			customer = null;
 			DBException de = new DBException("Error retrieving data");
 			de.setStackTrace(ex.getStackTrace());
-			ex.printStackTrace();
 			throw de;
 		} catch (NullPointerException ex) {
 			customer = null;
 			DBException de = new DBException("Null pointer exception - possibly Connection object");
 			de.setStackTrace(ex.getStackTrace());
-			ex.printStackTrace();
 			throw de;
 		} catch (Exception ex) {
 			customer = null;
 			DBException de = new DBException("Data not retrieved! Technical error");
 			de.setStackTrace(ex.getStackTrace());
-			ex.printStackTrace();
 			throw de;
 		} finally {
 			DBConnection.closeConnection();

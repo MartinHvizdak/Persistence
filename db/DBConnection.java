@@ -7,11 +7,11 @@ import java.sql.DriverManager;
 
 public class DBConnection {
 	
-	private static final String  driver = "jdbc:sqlserver://localhost:1433";;
-    private static final String  databaseName = ";databaseName=persistance";
+	private static final String  driver = "jdbc:sqlserver://hildur.ucn.dk";;
+    private static final String  databaseName = ";databaseName=dmaj0920_1086329";
     
-    private static String  userName = "; user=sa";
-    private static String password = ";password=123";
+    private static String  userName = "; user=dmaj0920_1086329";
+    private static String password = ";password=Password1!";
    
     private DatabaseMetaData dma;
     private static Connection con;
@@ -64,12 +64,7 @@ public class DBConnection {
     {
        return con;
     }
-    /*
-    public static boolean instanceIsNull()
-    {
-       return (instance == null);
-    }    
-	*/
+    
     public static DBConnection getInstance()
     {
         if (instance == null)
